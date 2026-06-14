@@ -18,7 +18,7 @@
 </head>
 <body>
   <h1>Privacy Policy — ForceVault for Salesforce</h1>
-  <p class="meta">Version 1.0.0 · Last updated: June 7, 2026</p>
+  <p class="meta">Version 1.1.0 · Last updated: June 14, 2026</p>
 
   <p>
     ForceVault for Salesforce ("ForceVault", "the extension", "we") is a browser
@@ -45,8 +45,14 @@
       <strong>Salesforce org metadata and data you request.</strong> When you
       open a view, the extension calls the standard Salesforce REST and Tooling
       APIs of your org to retrieve information such as object and field
-      definitions, profiles, permission sets, user records, org information, and
-      API-usage limits. This information is shown to you in the side panel.
+      definitions, profiles, permission sets, user records, org information,
+      API-usage limits, debug logs, and the records you query (SOQL/SOSL). This
+      information is shown to you in the side panel.
+    </li>
+    <li>
+      <strong>Debug logs you analyze.</strong> Logs you paste, upload, or load
+      from your org are parsed entirely in your browser by the Log Analyzer. They
+      are processed in memory and never transmitted anywhere.
     </li>
     <li>
       <strong>The active tab's URL/domain.</strong> Used only to detect which
@@ -77,6 +83,11 @@
       server.
     </li>
     <li>
+      Your own preferences — saved SOQL/SOSL queries and the optional per-org
+      favicon color settings — are also stored locally with
+      <code>chrome.storage.local</code>. These never leave your device.
+    </li>
+    <li>
       Metadata retrieved from Salesforce is held in memory while the panel is
       open and is not persisted beyond your session.
     </li>
@@ -93,11 +104,20 @@
 
   <h2>Network connections</h2>
   <p>
-    The extension only makes network requests to Salesforce domains belonging to
-    the org you are logged into (for example <code>*.my.salesforce.com</code>,
-    <code>*.salesforce.com</code>, <code>*.force.com</code>,
-    <code>*.visualforce.com</code>, <code>*.cloudforce.com</code>). It makes no
-    requests to any other destination.
+    The extension makes authenticated network requests only to the Salesforce
+    domains of the org you are logged into (for example
+    <code>*.my.salesforce.com</code>, <code>*.salesforce.com</code>,
+    <code>*.force.com</code>, <code>*.salesforce-setup.com</code>,
+    <code>*.visualforce.com</code>, <code>*.cloudforce.com</code>, and the
+    corresponding Government Cloud and regional domains).
+  </p>
+  <p>
+    One additional request is made to Salesforce's own public Trust status service
+    (<code>api.status.salesforce.com</code>) to show upcoming maintenance windows
+    in the Org Info view. This request is <strong>unauthenticated</strong> — it
+    carries no session token and no personal data, only your org's public instance
+    name (for example "USA252"). The extension makes no requests to the developer
+    or to any non-Salesforce third party.
   </p>
 
   <h2>Data retention and deletion</h2>
@@ -111,8 +131,9 @@
   <ul>
     <li><strong>cookies</strong> — to read your existing Salesforce session cookie so API calls can be authenticated as you.</li>
     <li><strong>host access to Salesforce domains</strong> — to call your org's REST/Tooling APIs.</li>
+    <li><strong>scripting</strong> — to re-inject the extension's content script into already-open Salesforce tabs after the extension is installed or updated, so login/logout is detected without a page refresh. No remote code is ever executed.</li>
     <li><strong>tabs / activeTab</strong> — to detect the active Salesforce org and switch context.</li>
-    <li><strong>storage</strong> — to remember your current session reference locally.</li>
+    <li><strong>storage</strong> — to remember your current session reference and your local preferences (saved queries, favicon settings).</li>
     <li><strong>sidePanel</strong> — to display the extension's interface in the browser side panel.</li>
   </ul>
 
