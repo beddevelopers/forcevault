@@ -23,7 +23,7 @@
     .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
     .logo .mark{width:32px;height:32px;border-radius:8px;flex:0 0 auto}
     .nav .spacer{flex:1}
-    .nav a{color:var(--muted);font-weight:600;font-size:14px}
+    .nav a{font-weight:600;font-size:14px}
     .nav a:hover{color:var(--brand)}
     .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;
       padding:11px 20px;border-radius:10px;border:1px solid transparent;cursor:pointer;transition:.15s}
@@ -103,9 +103,7 @@
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
       <a href="privacy-policy.html">Privacy</a>
-      <a href="https://github.com/beddevelopers/forcevault">GitHub</a>
-      <!-- TODO: replace # with your Chrome Web Store URL once published -->
-      <a class="btn btn--primary btn--sm" href="#install">Add to Chrome</a>
+      <a class="btn btn--primary btn--sm" href="https://chromewebstore.google.com/detail/forcevault-for-salesforce/bboaecfealjclaakkfnacfpledlpipoe" target="_blank" rel="noopener">Add to Chrome</a>
     </div>
   </header>
 
@@ -116,9 +114,7 @@
       <p class="tag">Explore objects, fields, profiles, permission sets, users, dependencies, logs and more —
         right in a Chrome side panel, using your active org session.</p>
       <div class="cta">
-        <!-- TODO: replace the href below with your Chrome Web Store listing URL after approval -->
-        <a class="btn btn--ghost" href="https://chromewebstore.google.com/" target="_blank" rel="noopener">🧩 Add to Chrome</a>
-        <a class="btn btn--ghost" href="https://github.com/beddevelopers/forcevault" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn btn--ghost" href="https://chromewebstore.google.com/detail/forcevault-for-salesforce/bboaecfealjclaakkfnacfpledlpipoe" target="_blank" rel="noopener">🧩 Add to Chrome</a>
       </div>
       <div class="pills"><span>Free</span><span>Privacy-first</span><span>No tracking</span><span>No remote code</span></div>
     </div>
@@ -140,14 +136,18 @@
         <p>Search users, manage permission-set/group assignments, view access, audit trail and login-as.</p></div>
       <div class="card"><div class="ic">📄</div><h3>Current Record</h3>
         <p>Auto-detects the open record and shows all field values with inline edit.</p></div>
-      <div class="card"><div class="ic">⚡</div><h3>SOQL / SOSL</h3>
-        <p>Run queries with a results grid and one-click CSV export.</p></div>
-      <div class="card"><div class="ic">🧾</div><h3>Log Analyzer</h3>
-        <p>Paste any Apex debug log for an execution timeline, method counts, SOQL/DML/callouts and governor limits — fully offline.</p></div>
+      <div class="card"><div class="ic">⚡</div><h3>SOQL &amp; SOSL</h3>
+        <p>Run SOQL and SOSL with autocomplete, saved queries, advanced clause helpers and CSV export.</p></div>
+      <div class="card"><div class="ic">🧾</div><h3>Log Analyzer &amp; Debugger</h3>
+        <p>Apex debug logs with an auto-diagnosis Insights panel (SOQL/DML-in-loop, limit pressure, exceptions), performance timing, a searchable timeline, and before/after compare — fully offline.</p></div>
+      <div class="card"><div class="ic">🧬</div><h3>Record Types &amp; Flows</h3>
+        <p>Inspect record-type picklist values and browse Flow versions, with activate / deactivate.</p></div>
       <div class="card"><div class="ic">📜</div><h3>Audit Trail</h3>
         <p>Org-wide setup changes with user/date filters and CSV export.</p></div>
       <div class="card"><div class="ic">🏢</div><h3>Org Info</h3>
-        <p>Organization details, user-license usage, current user and live API usage.</p></div>
+        <p>Organization details, user-license usage, live API usage and upcoming maintenance windows.</p></div>
+      <div class="card"><div class="ic">🎨</div><h3>Per-org color favicon</h3>
+        <p>Tint your browser tab per org (prod, sandbox, dev) so you always know where you are. Opt-in.</p></div>
     </div>
   </section>
 
@@ -176,10 +176,9 @@
 
   <footer>
     <div class="wrap foot">
-      <div>© 2026 ForceVault · v1.0.0</div>
+      <div>© 2026 ForceVault · v1.1.0</div>
       <div>
         <a href="privacy-policy.html">Privacy</a>
-        <a href="https://github.com/beddevelopers/forcevault">GitHub</a>
         <a href="mailto:forcevaultsfdc@zohomail.in">Contact</a>
       </div>
     </div>
