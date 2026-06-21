@@ -75,8 +75,7 @@ apps."**
 11. Under **OAuth Policies**:
     - **Permitted Users:** *All users may self-authorize* (or leave default if it's
       just you as admin).
-    - **Refresh Token Policy:** *Refresh token is valid until revoked* ← so the
-      extension's auto-refresh keeps working.
+    - **Refresh Token Policy:** see the **recommendation** below.
 12. **Save.**
 
 > ⚠️ A **Local** External Client App only works for the org it was created in.
@@ -93,7 +92,28 @@ apps."**
 4. ✅ Require PKCE.  ❌ Uncheck Require Secret for Web Server Flow.
 5. **Save** (wait 2–10 min to propagate).
 6. **Manage → Edit Policies → Permitted Users = "All users may self-authorize"**,
-   Refresh Token Policy = *valid until revoked*. Save.
+   Refresh Token Policy = see the **recommendation** below. Save.
+
+---
+
+## 🔐 Recommended: Refresh Token Policy
+
+When editing **Policies → OAuth Policies → Refresh Token Policy**, you have two
+sensible choices:
+
+| Option | When to use |
+| --- | --- |
+| **Expire refresh token if not used for 30 days** *(recommended, more secure)* | Best default. A **sliding** window that **resets every time the extension is used**, so active users are never interrupted — but a stolen-and-idle token self-destructs after 30 days. |
+| **Refresh token is valid until revoked** *(optional, max convenience)* | Token never expires on its own (only manual revoke / password reset). Fine for a personal admin laptop; avoid on shared/untrusted machines. |
+
+> ⚠️ **Do NOT pick "Expire refresh token *after* 30 days"** — that's an *absolute*
+> cutoff that forces a re-connect every 30 days even for active users. You want the
+> **"if not used for"** (inactivity) variant.
+
+**What happens if the token does expire** (only after 30 days of *no* use): the
+extension automatically **falls back to session-cookie auth** and keeps working —
+the user just clicks **Connect securely** once to restore OAuth (the key is still
+saved, so no re-pasting).
 
 ---
 
