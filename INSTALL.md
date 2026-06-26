@@ -1,12 +1,17 @@
 # ForceVault for Salesforce — Installation Guide
 
-## Loading in Chrome
+## Install
 
-1. Open Chrome and navigate to `chrome://extensions`
-2. Enable **Developer mode** (toggle in top-right corner)
-3. Click **Load unpacked**
-4. Select the `sf-explorer-extension` folder
-5. The **ForceVault** icon (FV) appears in your toolbar
+### From the Chrome Web Store (recommended)
+
+1. Open the **ForceVault for Salesforce** listing on the
+   [Chrome Web Store](https://chromewebstore.google.com/) (search for
+   "ForceVault for Salesforce").
+2. Click **Add to Chrome**, then **Add extension** to confirm.
+3. (Optional) Click the puzzle‑piece **Extensions** icon in the toolbar and
+   **pin** ForceVault so the **FV** icon stays visible.
+4. That's it — see **Usage** below.
+
 
 ## Usage
 
@@ -41,14 +46,17 @@ Open the **☰ menu** (top-left) to switch between sections:
 
 ## Permissions required
 
-- `cookies` — reads the Salesforce `sid` session cookie
-- `storage` — caches the session between panel opens
-- `sidePanel` — opens as a side panel
-- `tabs` — detects the active Salesforce tab for auto-connect
-- Host permissions for `*.salesforce.com`, `*.force.com` — REST/Tooling API calls
+- `cookies` — reads your Salesforce `sid` session cookie to authenticate as you
+- `storage` — remembers your session and preferences between panel opens (local only)
+- `sidePanel` — opens the extension in the browser side panel
+- `activeTab` — detects the active Salesforce tab for auto-connect (no broad browsing-history access)
+- `scripting` — re-injects the content script into already-open Salesforce tabs after install/update, so login/logout is detected without a refresh
+- `identity` — only for the optional **Secure sign-in (OAuth)** flow; unused with the default session-cookie auth
+- Host permissions for Salesforce domains (`*.salesforce.com`, `*.force.com`, `*.my.salesforce.com`, and regional/Government Cloud equivalents) — to call your org's REST/Tooling APIs
 
-No data leaves your browser except API calls to your own Salesforce org. The Log
-Analyzer is fully offline.
+No data leaves your browser except API calls to your own Salesforce org (plus one
+**unauthenticated** request to Salesforce's public Trust status service for
+maintenance windows). The Log Analyzer parses logs entirely in your browser.
 
 ## Salesforce CORS
 
