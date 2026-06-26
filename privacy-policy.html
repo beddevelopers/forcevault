@@ -18,7 +18,7 @@
 </head>
 <body>
   <h1>Privacy Policy — ForceVault for Salesforce</h1>
-  <p class="meta">Version 1.1.0 · Last updated: June 14, 2026</p>
+  <p class="meta">Version 1.3.0 · Last updated: June 26, 2026</p>
 
   <p>
     ForceVault for Salesforce ("ForceVault", "the extension", "we") is a browser
@@ -40,6 +40,19 @@
       extension reads the session cookie that your browser already holds for the
       Salesforce org you are viewing. This is used solely to authenticate API
       requests to <em>your own</em> org on your behalf.
+    </li>
+    <li>
+      <strong>Optional OAuth tokens (Secure sign-in).</strong> If you choose to
+      set up the optional OAuth login, you create a Connected App in <em>your own</em>
+      org and paste its public Consumer Key into Settings. The extension then
+      obtains a scoped, revocable <strong>access and refresh token</strong> from
+      your org and uses it instead of the session cookie. These tokens authenticate
+      only to your org; they are stored locally and encrypted at rest (see below).
+    </li>
+    <li>
+      <strong>Your name and username.</strong> Read from your org's standard
+      <code>userinfo</code> endpoint to show which user you are connected as
+      (in a status bar) and to gate controls to your permissions.
     </li>
     <li>
       <strong>Salesforce org metadata and data you request.</strong> When you
@@ -73,9 +86,16 @@
   <h2>Where data is stored</h2>
   <ul>
     <li>
-      A reference to your current session (org instance URL, session token,
-      hostname, and a timestamp) is stored locally on your device using the
-      browser's <code>chrome.storage.local</code> API.
+      A reference to your current session (org instance URL, hostname, a
+      timestamp, and the bearer token) is stored locally on your device using the
+      browser's <code>chrome.storage.local</code> API. The <strong>bearer token
+      is encrypted at rest</strong> with a non-extractable key held in the
+      browser's IndexedDB.
+    </li>
+    <li>
+      If you use the optional OAuth login, the <strong>refresh and access tokens
+      are also encrypted at rest</strong> the same way. You can revoke them at any
+      time from the extension's Settings or in Salesforce Setup.
     </li>
     <li>
       This storage is <strong>local only</strong>. It is never synced to your
@@ -83,9 +103,10 @@
       server.
     </li>
     <li>
-      Your own preferences — saved SOQL/SOSL queries and the optional per-org
-      favicon color settings — are also stored locally with
-      <code>chrome.storage.local</code>. These never leave your device.
+      Your own preferences — saved SOQL/SOSL queries and Apex scripts, Quick
+      Links, the optional per-org favicon colors, your chosen API version, and the
+      Connected App Consumer Key (a public client id) — are also stored locally
+      with <code>chrome.storage.local</code>. These never leave your device.
     </li>
     <li>
       Metadata retrieved from Salesforce is held in memory while the panel is
@@ -132,9 +153,10 @@
     <li><strong>cookies</strong> — to read your existing Salesforce session cookie so API calls can be authenticated as you.</li>
     <li><strong>host access to Salesforce domains</strong> — to call your org's REST/Tooling APIs.</li>
     <li><strong>scripting</strong> — to re-inject the extension's content script into already-open Salesforce tabs after the extension is installed or updated, so login/logout is detected without a page refresh. No remote code is ever executed.</li>
-    <li><strong>tabs / activeTab</strong> — to detect the active Salesforce org and switch context.</li>
+    <li><strong>activeTab</strong> — to detect the active Salesforce org and switch context. (The extension reads tab URLs only for Salesforce domains it already has access to; it does not request the broad "tabs" / browsing-history permission.)</li>
     <li><strong>storage</strong> — to remember your current session reference and your local preferences (saved queries, favicon settings).</li>
     <li><strong>sidePanel</strong> — to display the extension's interface in the browser side panel.</li>
+    <li><strong>identity</strong> — only if you set up the optional Secure sign-in (OAuth): used to run the standard Salesforce OAuth 2.0 + PKCE sign-in flow in a browser window. Unused if you stay on the default session-cookie auth.</li>
   </ul>
 
   <h2>Children's privacy</h2>
